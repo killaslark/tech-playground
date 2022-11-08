@@ -14,9 +14,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./",
-    "paths": {}
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "user/*": ["src/user/*"],
+      "pokemon/*": ["src/pokemon/*"],
+      "introduction/*": ["src/introduction/*"],
+      "shared/*": ["src/shared/*"],
+    },
+    "incremental": true
   },
-  "include": [
-    "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
