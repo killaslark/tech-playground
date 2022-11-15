@@ -35,7 +35,7 @@ const UsersPreview = () => {
   // alt-2
   const queryJotai = useUsersJotai()
 
-  const { data, isLoading, refetch, queryKey } = query
+  const { data, isLoading } = query
 
   return (
     <Stack spacing={2}>

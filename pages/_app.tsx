@@ -2,10 +2,8 @@ import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-qu
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'jotai';
 import { queryClientAtom } from 'jotai-tanstack-query'
-import Container from '@mui/material/Container';
-import 'styles/global.css'
-import Navbar from 'shared/components/Navbar';
 import { useEffect, useState } from 'react';
+import GlobalStyles from 'styles/global';
 
 const queryCache = new QueryCache()
 const queryClient = new QueryClient({
@@ -31,10 +29,8 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider initialValues={atomsProviderInitialValue}>
-        <Navbar />
-        <Container style={{ height: '100%' }} maxWidth="xl">
-          <Component {...pageProps} />
-        </Container>
+        <GlobalStyles />
+        <Component {...pageProps} />
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

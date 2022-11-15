@@ -11,6 +11,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
+    "@svgr/webpack": "^6.5.1",
     "@tanstack/query-core": "^4.14.5",
     "@tanstack/react-query": "^4.14.5",
     "@tanstack/react-query-devtools": "^4.14.5",
@@ -21,15 +22,21 @@
     "next": "12.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-is": "^18"
+    "react-intersection-observer": "^9.4.0",
+    "react-is": "^18",
+    "styled-components": "^5.3.6",
+    "vite-plugin-svgr": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/react": "^18",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^2.2.0",
     "bun-framework-next": "^12.2",
     "eslint": "^8.27.0",
     "react-refresh": "0.10.0",
-    "typescript": "latest"
+    "typescript": "latest",
+    "vite": "^3.2.3"
   },
   "module": "index.js"
 }
