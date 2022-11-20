@@ -1,17 +1,10 @@
-
-import React, { useEffect, useMemo, useState } from 'react';
-
 import Fuse from 'fuse.js';
-
 import { useAtom } from 'jotai';
-
-import { InView } from 'react-intersection-observer';
-
-import styled from 'styled-components';
-
 import { currentPageAtom, pokemonSearchQueryAtom } from 'pokemon/atoms/pokemonFilter';
 import { useInfinitePokemons } from 'pokemon/queries';
-
+import React, { useEffect, useMemo, useState } from 'react';
+import { InView } from 'react-intersection-observer';
+import styled from 'styled-components';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import PokemonCard from './PokemonCard';
@@ -28,28 +21,23 @@ const searchKeyweights = [
 ];
 
 const Pokedex: React.FC = () => {
-  const [paging] = useAtom(currentPageAtom)
-  const [shouldLoadMore, setShouldLoadMore] = useState(false)
-  const [query] = useAtom(pokemonSearchQueryAtom)
+  const [paging] = useAtom(currentPageAtom);
+  const [shouldLoadMore, setShouldLoadMore] = useState(false);
+  const [query] = useAtom(pokemonSearchQueryAtom);
 
   const request = {
     itemPerPage: paging?.itemPerPage,
-  }
+  };
 
-  const { isLoading, isError, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfinitePokemons(request)
+  const { isLoading, isError, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfinitePokemons(request);
 
-  const pokemonList = pokemons
+  const pokemonList = pokemons;
 
   useEffect(() => {
     if (shouldLoadMore && !isFetchingNextPage && hasNextPage) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }, [hasNextPage, shouldLoadMore, isFetchingNextPage])
-
-  if (isError) {
-    return <ErrorMessage />;
-  }
-
+  }, [hasNextPage, shouldLoadMore, isFetchingNextPage, fetchNextPage]);
 
   const fuzzyPokemonList = new Fuse(pokemonList, {
     keys: searchKeyweights,
@@ -61,10 +49,14 @@ const Pokedex: React.FC = () => {
   const searchResult = fuzzyPokemonList.search(query);
 
   const fuzzyResult = useMemo(() => {
-    return searchResult.map(res => res.item);
-  }, [searchResult])
+    return searchResult.map((res) => res.item);
+  }, [searchResult]);
 
-  const usedList = query ? fuzzyResult : pokemonList
+  const usedList = query ? fuzzyResult : pokemonList;
+
+  if (isError) {
+    return <ErrorMessage />;
+  }
 
   return (
     <PokedexContainer>
@@ -74,8 +66,7 @@ const Pokedex: React.FC = () => {
         ) : (
           <PokemonListContainer>
             {usedList.map((pokemon) => (
-              <PokemonCard key={pokemon.name} pokemon={pokemon}
-              />
+              <PokemonCard key={pokemon.name} pokemon={pokemon} />
             ))}
           </PokemonListContainer>
         )}
@@ -88,7 +79,6 @@ const Pokedex: React.FC = () => {
 };
 
 export default Pokedex;
-
 
 const PokedexContainer = styled.div`
   margin-bottom: 9rem;
@@ -117,4 +107,3 @@ const PokemonListContainer = styled.div`
     margin-top: 11.94rem;
   }
 `;
-
