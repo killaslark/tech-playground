@@ -40,7 +40,7 @@ const SearchFilter = () => {
 export default SearchFilter
 
 const Container = styled.div`
-  grid-area: SearchFilter;
+  padding-bottom: 1rem;
 `;
 
 const Title = styled.span`

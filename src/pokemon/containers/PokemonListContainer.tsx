@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 
 import UpArrowIcon from 'pokemon/assets/icons/icon-arrow-up.svg';
 import pokemonModal from 'pokemon/atoms/pokemonModal';
-import { Header, Pokedex, PokemonModal } from 'pokemon/components';
+import { Header, Pokedex, PokemonModal, SearchBar } from 'pokemon/components';
 
 const PokemonListContainer = () => {
   const [modalState] = useAtom(pokemonModal)
@@ -22,6 +22,7 @@ const PokemonListContainer = () => {
   return (
     <React.Fragment>
       <Header />
+      <SearchBar hideFilter />
       <Pokedex />
       {showModal && <PokemonModal />}
       <button

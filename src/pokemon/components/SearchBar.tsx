@@ -6,13 +6,24 @@ import SearchInput from './SearchInput';
 
 interface Props {
   searchBarRef?: React.MutableRefObject<HTMLDivElement>;
+  hideFilter?: boolean
 };
 
 const SearchBar: React.FC<Props> = props => {
   return (
-    <div className={'main-container'} ref={props.searchBarRef}>
+    <div style={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 9,
+      background: '#060B28',
+      paddingTop: '2rem',
+      gap: '1rem',
+    }}
+      className={'main-container'}
+      ref={props.searchBarRef}
+    >
       <Container>
-        <SearchFilter />
+        {!props.hideFilter && <SearchFilter />}
         <SearchInput />
       </Container>
     </div>
@@ -23,15 +34,12 @@ export default SearchBar
 
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-    "HomeButton ."
-    "SearchFilter SearchField";
+  display: flex;
+  flex-direction: row;
+  position: sticky;
   align-items: end;
   row-gap: 1.5rem;
   column-gap: 2rem;
-  margin: 4.5rem 0;
   border-bottom: 1px solid #24293f;
   padding-bottom: 2.19rem;
 

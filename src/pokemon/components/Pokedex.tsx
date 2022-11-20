@@ -1,21 +1,36 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
+import Fuse from 'fuse.js';
 
 import { useAtom } from 'jotai';
 
+import { InView } from 'react-intersection-observer';
+
 import styled from 'styled-components';
 
-import { currentPageAtom } from 'pokemon/atoms/pokemonFilter';
+import { currentPageAtom, pokemonSearchQueryAtom } from 'pokemon/atoms/pokemonFilter';
 import { useInfinitePokemons } from 'pokemon/queries';
 
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import PokemonCard from './PokemonCard';
-import { InView } from 'react-intersection-observer';
+
+const searchKeyweights = [
+  {
+    name: 'name',
+    weight: 1,
+  },
+  {
+    name: 'url',
+    weight: 0.9,
+  },
+];
 
 const Pokedex: React.FC = () => {
   const [paging] = useAtom(currentPageAtom)
   const [shouldLoadMore, setShouldLoadMore] = useState(false)
+  const [query] = useAtom(pokemonSearchQueryAtom)
 
   const request = {
     itemPerPage: paging?.itemPerPage,
@@ -32,8 +47,24 @@ const Pokedex: React.FC = () => {
   }, [hasNextPage, shouldLoadMore, isFetchingNextPage])
 
   if (isError) {
-return <ErrorMessage />;
-}
+    return <ErrorMessage />;
+  }
+
+
+  const fuzzyPokemonList = new Fuse(pokemonList, {
+    keys: searchKeyweights,
+    threshold: 0.4,
+    includeMatches: true,
+    includeScore: true,
+  });
+
+  const searchResult = fuzzyPokemonList.search(query);
+
+  const fuzzyResult = useMemo(() => {
+    return searchResult.map(res => res.item);
+  }, [searchResult])
+
+  const usedList = query ? fuzzyResult : pokemonList
 
   return (
     <PokedexContainer>
@@ -42,7 +73,7 @@ return <ErrorMessage />;
           <Loading />
         ) : (
           <PokemonListContainer>
-            {pokemonList.map((pokemon) => (
+            {usedList.map((pokemon) => (
               <PokemonCard key={pokemon.name} pokemon={pokemon}
               />
             ))}
@@ -50,7 +81,7 @@ return <ErrorMessage />;
         )}
 
         {isFetchingNextPage && <Loading />}
-        <InView onChange={setShouldLoadMore} />
+        {!query && <InView onChange={setShouldLoadMore} />}
       </div>
     </PokedexContainer>
   );

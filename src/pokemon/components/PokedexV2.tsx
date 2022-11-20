@@ -69,8 +69,8 @@ const PokedexV2: React.FC = () => {
   }, [searchResult])
 
   if (isError) {
-return <ErrorMessage />;
-}
+    return <ErrorMessage />;
+  }
 
   const usedList = query ? fuzzyResult : pokemonList
 
