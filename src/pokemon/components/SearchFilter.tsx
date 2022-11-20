@@ -11,6 +11,14 @@ import Slide from "./Slide";
 
 const SearchFilter = () => {
   const [activeType, setActiveType] = useAtom(pokemonTypeAtom)
+
+  const onPressType = (type: string) => {
+    if (type === activeType) {
+      setActiveType('')
+    } else {
+      setActiveType(type)
+    }
+  }
   return (
     <Container>
       <Title>Select Pokemon Type</Title>
@@ -21,7 +29,7 @@ const SearchFilter = () => {
             key={name}
             type={name}
             reduceTabIndex
-            onPress={setActiveType}
+            onPress={onPressType}
           />
         ))}
       </Slide>

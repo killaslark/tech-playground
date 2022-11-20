@@ -14,7 +14,10 @@ export interface GetPokemonsByTypeRequest {
 }
 
 export interface GetPokemonsByTypeResponse {
-  pokemon: PokemonUrl[]
+  pokemon: {
+    pokemon: PokemonUrl
+    slot: number
+  }[]
 }
 
 export const GET_POKEMONS_BY_TYPE_API = '/v2/type'

@@ -45,4 +45,15 @@ export const pokemonTypeAtom = atom(
   }
 )
 
+export const pokemonSearchQueryAtom = atom(
+  (get) => get(pokemonFilter).searchQuery,
+  (get, set, searchQuery: string) => {
+    const currentState = get(pokemonFilter)
+    set(pokemonFilter, {
+      ...currentState,
+      searchQuery,
+    })
+  }
+)
+
 export default pokemonFilter

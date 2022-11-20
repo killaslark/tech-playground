@@ -25,7 +25,7 @@ const PokemonEvolutions = () => {
   const { data: pokemon } = usePokemonDetail(request);
   const { data: species } = usePokemonSpeciesDetail(request);
 
-  const url = species.evolutionChain?.url
+  const url = species?.evolutionChain?.url || ''
   const id = getIdFromUrl(url)
 
   const { data: evolutions } = usePokemonEvolutions({ id })

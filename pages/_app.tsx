@@ -12,6 +12,8 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import GlobalStyles from 'styles/global';
+import createIDBPersister from '@core/query/persist-query';
+// import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 
 const defaultQueryOptions = {
   queries: {
@@ -27,16 +29,21 @@ const queryClient = new QueryClient({
 
 const atomsProviderInitialValue = [[queryClientAtom, queryClient]] as const
 
+const persister = createIDBPersister()
+
 const MyApp = (props) => {
   const { Component, pageProps } = props
   const [isMounted, setIsMounted] = useState(false)
 
-  hydrate(queryClient, props.pageProps.dehydratedState)
 
   const routeChangeCompleteHandler = () => {
     NProgress.done();
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    hydrate(queryClient, props.pageProps.dehydratedState)
+  }, [props.pageProps?.dehydratedState])
 
   useEffect(() => {
     Router.events.on('routeChangeStart', NProgress.start);
@@ -56,6 +63,10 @@ const MyApp = (props) => {
   if (!isMounted) return null
 
   return (
+    // <PersistQueryClientProvider
+    //   client={queryClient}
+    //   persistOptions={{ persister }}
+    // >
     <QueryClientProvider client={queryClient}>
       <Hydrate state={props.dehydratedState}>
         <Provider initialValues={atomsProviderInitialValue}>
@@ -65,6 +76,7 @@ const MyApp = (props) => {
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    // {/* </PersistQueryClientProvider> */ }
   )
 }
 

@@ -1,26 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import styled from "styled-components";
 
-import SearchIcon from 'pokemon/assets/icons/icon-search.svg'
+import { useAtom } from "jotai";
+
+import debounce from 'lodash/debounce'
+
+import SearchIcon from 'pokemon/assets/icons/icon-search.svg';
+import { pokemonSearchQueryAtom } from "pokemon/atoms/pokemonFilter";
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
+  const [, setQuery] = useAtom(pokemonSearchQueryAtom)
 
-  const handleSubmit = () => {
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setQuery(e.target.value)
   }
+  const debounceSubmit = debounce(handleSubmit, 300)
+
   return (
     <Container>
       <InputText
         defaultValue={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={debounceSubmit}
         placeholder="Search Pokemon"
         required
       />
-      <SearchButton onClick={handleSubmit}>
-        <SearchIcon />
-      </SearchButton>
     </Container>
   );
 };
@@ -50,7 +57,7 @@ const InputText = styled.input`
   flex: 1;
   background: none;
   border: 0.13rem solid #2f5aff;
-  border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 0.5rem;
   padding: 1rem;
   font-family: "Montserrat";
   font-size: 1rem;

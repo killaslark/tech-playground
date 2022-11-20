@@ -25,6 +25,10 @@ const Pagination: React.FC<Props> = () => {
         ...paging,
         currentPage: newPage,
       })
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
     },
   });
 

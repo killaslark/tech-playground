@@ -10,16 +10,14 @@ import { usePokemonDetail } from "pokemon/queries";
 const PokemonDetailContainer = () => {
   const router = useRouter()
 
-  const mobile = useMedia("(max-width: 31.25rem)");
-
   const pokemonName = router.query?.name as string;
 
   const request = {
     name: pokemonName
   }
-  const { data } = usePokemonDetail(request)
+  const { data, isError } = usePokemonDetail(request)
 
-  if (!data) {
+  if (!data || isError) {
     return <ErrorMessage />
   }
 

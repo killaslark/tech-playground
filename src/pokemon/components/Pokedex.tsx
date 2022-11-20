@@ -5,10 +5,8 @@ import { useAtom } from "jotai";
 
 import styled from "styled-components";
 
-import AddIcon from "pokemon/assets/icons/icon-add.svg";
-import UpArrowIcon from "pokemon/assets/icons/icon-arrow-up.svg";
 import { currentPageAtom } from "pokemon/atoms/pokemonFilter";
-import { usePokemons } from "pokemon/queries";
+import { useInfinitePokemons } from "pokemon/queries";
 
 import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
@@ -27,7 +25,7 @@ const Pokedex: React.FC<Props> = () => {
     itemPerPage: paging?.itemPerPage,
   }
 
-  const { isLoading, isError, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = usePokemons(request)
+  const { isLoading, isError, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfinitePokemons(request)
 
   const pokemonList = pokemons
 

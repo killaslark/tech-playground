@@ -31,7 +31,7 @@ const PokemonDetailBanner = () => {
 
   const { data: pokemonSpecies } = usePokemonSpeciesDetail(request)
 
-  if (!pokemon || !pokemonSpecies) {
+  if (!pokemon) {
     return null;
   }
 
@@ -68,7 +68,7 @@ const PokemonDetailBanner = () => {
             </PokemonTypes>
             <PokemonName>{pokemon.name}</PokemonName>
             <PokemonDescription>
-              {pokemonDescription}
+              {pokemonDescription || 'N/A'}
             </PokemonDescription>
           </PokemonData>
 

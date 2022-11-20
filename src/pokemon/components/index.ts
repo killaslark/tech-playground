@@ -4,6 +4,7 @@ export { default as HomeButton } from './HomeButton';
 export { default as Loading } from './Loading';
 export { default as Pagination } from './Pagination';
 export { default as Pokedex } from './Pokedex';
+export { default as PokedexV2 } from './PokedexV2';
 export { default as PokemonCard } from './PokemonCard';
 export { default as PokemonDetailBanner } from './PokemonDetailBanner';
 export { default as PokemonDetailCard } from './PokemonDetailCard';

@@ -4,9 +4,9 @@ import { useAtom } from 'jotai';
 
 import UpArrowIcon from "pokemon/assets/icons/icon-arrow-up.svg";
 import pokemonModal from 'pokemon/atoms/pokemonModal';
-import { Header, Pokedex, PokemonModal } from 'pokemon/components';
+import { Header, PokedexV2, PokemonModal, SearchBar } from 'pokemon/components';
 
-const PokemonListContainer = () => {
+const PokemonListV2Container = () => {
   const [modalState] = useAtom(pokemonModal)
 
   const showModal = !!modalState?.activePokemon
@@ -22,7 +22,8 @@ const PokemonListContainer = () => {
   return (
     <React.Fragment>
       <Header />
-      <Pokedex />
+      <SearchBar />
+      <PokedexV2 />
       {showModal && <PokemonModal />}
       <button
         className="button"
@@ -42,4 +43,4 @@ const PokemonListContainer = () => {
 
 }
 
-export default PokemonListContainer;
+export default PokemonListV2Container;
