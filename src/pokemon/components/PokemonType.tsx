@@ -9,9 +9,10 @@ interface Props {
   type: string
   onPress?: (type: string) => void
   reduceTabIndex?: boolean
+  isActive?: boolean;
 };
 const PokemonType: React.FC<Props> = (props) => {
-  const { type, onPress, reduceTabIndex } = props;
+  const { type, onPress, reduceTabIndex, isActive } = props;
   const { name, color } = POKEMON_TYPES.find(
     (item) => item.name === props.type
   );
@@ -22,11 +23,12 @@ const PokemonType: React.FC<Props> = (props) => {
 
   return (
     <Type
+      isActive={isActive}
       color={color}
       onClick={handlePress}
       tabIndex={reduceTabIndex ? 0 : -1}
     >
-      <img src={`pokemon-types/${name}.svg`} width={16} height={16} alt={name} />
+      <img src={`/pokemon-types/${name}.svg`} width={16} height={16} alt={name} />
       {name}
     </Type>
   )
@@ -35,8 +37,9 @@ const PokemonType: React.FC<Props> = (props) => {
 export default PokemonType;
 
 
-export const Type = styled.button<{ color: string }>`
+export const Type = styled.button<{ color: string, isActive: boolean }>`
   background: ${(props) => props.color};
+  opacity: ${({ isActive }) => isActive ? '1' : '0.7'};
   display: flex;
   align-items: center;
   gap: 0.5rem;

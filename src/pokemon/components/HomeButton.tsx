@@ -1,13 +1,10 @@
 
 import styled from "styled-components";
-import HomeIcon from 'src/pokemon/assets/icons/icon-home.svg'
+
+import HomeIcon from 'pokemon/assets/icons/icon-home.svg'
 
 
 const HomeButton = () => {
-  const onPress = () => {
-    // Reset all
-  }
-
   return (
     <Button className="button">
       <HomeIcon />

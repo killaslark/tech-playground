@@ -1,6 +1,5 @@
 import { atom } from "jotai"
 
-
 const FILTER_DEFAULT_VALUE = {
   searchQuery: '',
   type: '',
@@ -35,7 +34,6 @@ export const currentPageAtom = atom(
   }
 )
 
-
 export const pokemonTypeAtom = atom(
   (get) => get(pokemonFilter).type,
   (get, set, newType: string) => {
@@ -46,6 +44,5 @@ export const pokemonTypeAtom = atom(
     })
   }
 )
-
 
 export default pokemonFilter

@@ -7,20 +7,22 @@ interface Props {
   src: string;
   alt: string;
   onPress?: () => void
+  width?: number | string;
+  height?: number | string;
 };
 
-const SkeletonLoading: React.FC<Props> = ({ src, alt, onPress }) => {
+const SkeletonLoading: React.FC<Props> = ({ src, alt, onPress, width = '16rem', height = '16rem' }) => {
   const [skeleton, setSkeleton] = useState(true);
 
   return (
-    <Container skeleton={skeleton} hasOnPress={typeof onPress !== 'undefined'}>
+    <Container width={width} height={height} skeleton={skeleton} hasOnPress={typeof onPress !== 'undefined'}>
       {skeleton && <Skeleton />}
       <img
         onClick={onPress}
         onLoad={() => setSkeleton(false)}
         src={src}
-        width="256"
-        height="256"
+        width={width}
+        height={height}
         alt={alt}
       />
     </Container>
@@ -30,12 +32,12 @@ const SkeletonLoading: React.FC<Props> = ({ src, alt, onPress }) => {
 export default SkeletonLoading
 
 
-const Container = styled.div<{ skeleton: boolean, hasOnPress: boolean }>`
+const Container = styled.div<{ width: number | string, height: number | string, skeleton: boolean, hasOnPress: boolean }>`
   display: grid;
   img {
     cursor: ${({ hasOnPress }) => hasOnPress ? 'pointer' : 'default'};
-    min-width: 16rem;
-    min-height: 16rem;
+    min-width: ${({ width }) => width};
+    min-height: ${({ height }) => height};
     grid-area: 1/1;
     opacity: ${({ skeleton }) => (skeleton ? "0" : "1")};
     transition: 0.2s;

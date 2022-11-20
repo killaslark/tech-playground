@@ -1,18 +1,19 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { useAtom } from "jotai";
 
 import styled from "styled-components";
 
-import AddIcon from "src/pokemon/assets/icons/icon-add.svg";
-import UpArrowIcon from "src/pokemon/assets/icons/icon-arrow-up.svg";
+import AddIcon from "pokemon/assets/icons/icon-add.svg";
+import UpArrowIcon from "pokemon/assets/icons/icon-arrow-up.svg";
+import { currentPageAtom } from "pokemon/atoms/pokemonFilter";
+import { usePokemons } from "pokemon/queries";
 
+import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
 import PokemonCard from "./PokemonCard";
-import Pagination from "./Pagination";
-import ErrorMessage from "./ErrorMessage";
-import { usePokemons } from "pokemon/queries";
-import { useAtom } from "jotai";
-import { currentPageAtom, pokemonTypeAtom } from "pokemon/atoms/pokemonFilter";
+import { InView } from "react-intersection-observer";
 
 interface Props {
 
@@ -20,30 +21,23 @@ interface Props {
 
 const Pokedex: React.FC<Props> = () => {
   const [paging] = useAtom(currentPageAtom)
-  const [pokemonType] = useAtom(pokemonTypeAtom)
+  const [shouldLoadMore, setShouldLoadMore] = useState(false)
 
   const request = {
     itemPerPage: paging?.itemPerPage,
   }
-  const { isLoading, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = usePokemons(request)
 
-  const { error = false, } = {}
+  const { isLoading, isError, pokemons, isFetchingNextPage, fetchNextPage, hasNextPage } = usePokemons(request)
+
   const pokemonList = pokemons
 
-  const showLoadMore = hasNextPage && !isFetchingNextPage
+  useEffect(() => {
+    if (shouldLoadMore && !isFetchingNextPage && hasNextPage) {
+      fetchNextPage()
+    }
+  }, [hasNextPage, shouldLoadMore, isFetchingNextPage])
 
-  const disabledLoadMore = false
-
-  const onPressLoadMore = () => fetchNextPage()
-
-  const scrollToSearchBar = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-
-  if (error) return <ErrorMessage />;
+  if (isError) return <ErrorMessage />;
 
   return (
     <PokedexContainer>
@@ -60,19 +54,7 @@ const Pokedex: React.FC<Props> = () => {
         )}
 
         {isFetchingNextPage && <Loading />}
-
-        {showLoadMore && (
-          <ButtonContainer>
-            <button className="button" onClick={onPressLoadMore} disabled={disabledLoadMore}>
-              <AddIcon />
-              Show More
-            </button>
-
-            <button className="button" onClick={scrollToSearchBar}>
-              <UpArrowIcon />
-            </button>
-          </ButtonContainer>
-        )}
+        <InView onChange={setShouldLoadMore} />
       </div>
     </PokedexContainer>
   );
@@ -109,18 +91,3 @@ const PokemonListContainer = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  button[disabled] {
-    opacity: 0.5;
-    cursor: wait;
-  }
-`;

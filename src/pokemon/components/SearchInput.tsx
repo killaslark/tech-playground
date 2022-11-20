@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 
-import SearchIcon from 'src/pokemon/assets/icons/icon-search.svg'
+import SearchIcon from 'pokemon/assets/icons/icon-search.svg'
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");

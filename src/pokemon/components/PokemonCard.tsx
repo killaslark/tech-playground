@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react';
+
+import { useAtom } from "jotai";
 
 import styled, { keyframes } from "styled-components";
 
-import WeightIcon from "src/pokemon/assets/icons/icon-weight.svg";
-import RulerIcon from "src/pokemon/assets/icons/icon-ruler.svg";
-import BoltIcon from "src/pokemon/assets/icons/icon-bolt.svg";
-
-import PokemonType from "./PokemonType";
-import { POKEMON_TYPES } from "pokemon/constants";
-import SkeletonLoading from "./SkeletonLoading";
-
-import { PokemonUrl } from "pokemon/services/getPokemons";
-import { usePokemonDetail } from "pokemon/queries";
+import BoltIcon from "pokemon/assets/icons/icon-bolt.svg";
+import RulerIcon from "pokemon/assets/icons/icon-ruler.svg";
+import WeightIcon from "pokemon/assets/icons/icon-weight.svg";
 import pokemonModal from "pokemon/atoms/pokemonModal";
-import { useAtom } from "jotai";
+import { POKEMON_TYPES } from "pokemon/constants";
+import { usePokemonDetail } from "pokemon/queries";
+import { PokemonUrl } from "pokemon/services/getPokemons";
+
 import Loading from "./Loading";
-import Slide from './Slide';
+import PokemonType from "./PokemonType";
+import SkeletonLoading from "./SkeletonLoading";
 
 
 interface Props {
@@ -44,7 +43,6 @@ const PokemonCard = (props: Props) => {
     return <Loading />
   }
 
-  const pokemonId = pokemon.id
   const pokemonTypes = pokemon.types || []
 
   const primaryType = POKEMON_TYPES.find(
@@ -73,7 +71,7 @@ const PokemonCard = (props: Props) => {
       <PokemonName>{pokemon.name}</PokemonName>
       <PokemonTypeList>
         {pokemon.types.map(({ type }) => (
-          <PokemonType key={type.name} type={type.name} reduceTabIndex={false} />
+          <PokemonType isActive key={type.name} type={type.name} reduceTabIndex={false} />
         ))}
       </PokemonTypeList>
       <PokemonFeatures>
@@ -94,7 +92,7 @@ const PokemonCard = (props: Props) => {
       </PokemonFeatures>
       <MoreDetailsButton color={primaryType.color} onClick={onSeeDetail}>
         <BoltIcon />
-        See Detail
+        See Stats
       </MoreDetailsButton>
     </Container>
   );
@@ -204,6 +202,7 @@ const PokemonWeight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
 
   div {
     display: flex;

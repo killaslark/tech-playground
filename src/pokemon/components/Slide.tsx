@@ -1,10 +1,11 @@
-import React, { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
+
 import styled from "styled-components";
 
 import { useMedia } from "@core/hooks";
 
-import LeftArrowIcon from "src/pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "src/pokemon/assets/icons/icon-arrow-right.svg";
+import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
+import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
 
 
 const Slide: React.FC<any> = (props) => {

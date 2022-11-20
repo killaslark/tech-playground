@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { useAtom } from 'jotai';
+
 import styled from "styled-components";
 
 import usePagination from "@mui/material/usePagination/usePagination";
 
-import LeftArrowIcon from "src/pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "src/pokemon/assets/icons/icon-arrow-right.svg";
-import { useAtom } from 'jotai';
+import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
+import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
+
 import { currentPageAtom } from 'pokemon/atoms/pokemonFilter';
 
 interface Props {

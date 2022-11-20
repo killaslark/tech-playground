@@ -1,27 +1,29 @@
 import React from "react";
 
-import styled, { keyframes } from "styled-components";
+import Link from "next/link";
+
 import { useAtom } from "jotai";
+
+import styled, { keyframes } from "styled-components";
 
 import { useMedia } from "@core/hooks";
 
-import { POKEMON_TYPES } from "pokemon/constants";
+import DividerIcon from "pokemon/assets/icons/divider-pokeball.svg";
+import BoltIcon from "pokemon/assets/icons/icon-bolt.svg";
+import CloseIcon from "pokemon/assets/icons/icon-close.svg";
+import RulerIcon from "pokemon/assets/icons/icon-ruler.svg";
+import WeightIcon from "pokemon/assets/icons/icon-weight.svg";
 import pokemonModal from "pokemon/atoms/pokemonModal";
+import { POKEMON_TYPES } from "pokemon/constants";
 import { usePokemonDetail } from "pokemon/queries";
-
-import WeightIcon from "src/pokemon/assets/icons/icon-weight.svg";
-import RulerIcon from "src/pokemon/assets/icons/icon-ruler.svg";
-import DividerIcon from "src/pokemon/assets/icons/divider-pokeball.svg";
-import CloseIcon from "src/pokemon/assets/icons/icon-close.svg";
 
 import PokemonType from "./PokemonType";
 import SkeletonLoading from "./SkeletonLoading";
-import Loading from "./Loading";
-import Slide from "./Slide";
 
 
 const PokemonModal = () => {
   const [modalState, setModalState] = useAtom(pokemonModal);
+  const mobile = useMedia("(max-width: 980px)");
 
   const onCloseModal = () => setModalState({
     activePokemon: null
@@ -32,9 +34,7 @@ const PokemonModal = () => {
   const request = {
     name: pokemonName,
   }
-  const { isLoading, data: pokemon } = usePokemonDetail(request, {
-    enabled: !!pokemonName
-  })
+  const { data: pokemon } = usePokemonDetail(request)
 
   if (!pokemonName) {
     return null
@@ -79,7 +79,7 @@ const PokemonModal = () => {
           <PokemonName>{pokemon.name}</PokemonName>
           <PokemonTypeWrapper>
             {pokemon.types.map(({ type }) => (
-              <PokemonType key={type.name} type={type.name} reduceTabIndex={false} />
+              <PokemonType isActive key={type.name} type={type.name} reduceTabIndex={false} />
             ))}
           </PokemonTypeWrapper>
           <PokemonFeatures>
@@ -105,7 +105,16 @@ const PokemonModal = () => {
         </Divider>
 
         <PokemonStats>
-          <StatsTitle>Stats</StatsTitle>
+          <StatsActionContainer>
+            <StatsTitle>Status</StatsTitle>
+            <Link passHref href={`/pokemon/detail/${pokemonName}`}>
+              <button className="button" onClick={onCloseModal}>
+                <BoltIcon />
+                See Detail
+              </button>
+            </Link>
+          </StatsActionContainer>
+
           <StatsList>
             {pokemon.stats.map(({ stat, baseStat }) =>
               React.Children.toArray(
@@ -122,8 +131,9 @@ const PokemonModal = () => {
             )}
           </StatsList>
         </PokemonStats>
+        {!mobile && <CloseButton onPress={onCloseModal} />}
       </Modal>
-      <CloseButton onPress={onCloseModal} />
+      {mobile && <CloseButton onPress={onCloseModal} />}
     </Wrapper>
   );
 };
@@ -368,20 +378,12 @@ const PokemonStats = styled.div`
   }
 `;
 
-const PokemonEvolutionList = styled.div`
+
+const StatsActionContainer = styled.div`
   display: flex;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 1rem;
   gap: 1.5rem;
-`
-
-
-const PokemonEvolutionSection = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding: 1rem;
 `
 
 const StatsTitle = styled.span`
@@ -389,7 +391,6 @@ const StatsTitle = styled.span`
   line-height: 2.5rem;
   font-weight: 400;
   display: block;
-  margin-bottom: 1rem;
 `;
 
 const StatsList = styled.ul`

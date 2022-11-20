@@ -19,7 +19,9 @@
     "axios-case-converter": "^0.11.1",
     "jotai": "^1.9.1",
     "jotai-tanstack-query": "^0.4.0",
+    "lodash": "^4.17.21",
     "next": "12.2.3",
+    "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.4.0",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^18",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.2.0",

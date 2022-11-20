@@ -6,7 +6,7 @@ const ErrorMessage = () => {
   return (
     <Container>
       <ErrorMessageContainer>
-        <img src={"img-pikachu-sad-min.png"} width="32" height="32" alt="Pikachu" />
+        <img src={"/img-pikachu-sad-min.png"} width="32" height="32" alt="Pikachu" />
         <span>Oops, pokémon not found!</span>
       </ErrorMessageContainer>
     </Container>
@@ -16,8 +16,9 @@ const ErrorMessage = () => {
 export default ErrorMessage
 
 
-export const Container = styled.div`
+const Container = styled.div`
   height: 50vh;
+  margin-top: 3rem;
 `;
 
 const zoomIn = keyframes`
@@ -31,7 +32,7 @@ const zoomIn = keyframes`
   }
 `;
 
-export const ErrorMessageContainer = styled.div`
+const ErrorMessageContainer = styled.div`
   max-width: 21rem;
   height: 3.5rem;
   background: linear-gradient(180deg, #151a37 0%, rgba(21, 26, 55, 0) 100%);

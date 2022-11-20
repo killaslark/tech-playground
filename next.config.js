@@ -1,11 +1,14 @@
 module.exports = {
+  experimental: {
+    largePageDataBytes: 800 * 1000,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"]
-    });
+      use: ["@svgr/webpack"],
+    })
 
-    return config;
+    return config
   },
   reactStrictMode: true,
   typescript: {
@@ -15,4 +18,4 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-};
+}

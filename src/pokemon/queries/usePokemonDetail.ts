@@ -18,6 +18,7 @@ const usePokemonDetail = (request: GetPokemonDetailRequest, config?: UsePokemonD
     ...config,
     cacheTime: 600_000,
     staleTime: 300_000,
+    enabled: !!request?.name
   })
 
   return {
@@ -25,5 +26,4 @@ const usePokemonDetail = (request: GetPokemonDetailRequest, config?: UsePokemonD
     queryKey
   }
 }
-
 export default usePokemonDetail;

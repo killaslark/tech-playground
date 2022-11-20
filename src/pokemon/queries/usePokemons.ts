@@ -30,6 +30,8 @@ const usePokemons = (request: GetPokemonsRequest, config?: UsePokemonsOptions) =
   const query = useInfiniteQuery(queryKey, fetchPokemon, {
     getNextPageParam,
     ...config,
+    cacheTime: 600_000,
+    staleTime: 300_000,
   });
 
 

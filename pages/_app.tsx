@@ -1,24 +1,53 @@
-import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+
+import Router from 'next/router';
+
+import { hydrate, Hydrate, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 import { Provider } from 'jotai';
 import { queryClientAtom } from 'jotai-tanstack-query'
-import { useEffect, useState } from 'react';
+
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 import GlobalStyles from 'styles/global';
+
+const defaultQueryOptions = {
+  queries: {
+    refetchOnWindowFocus: false,
+  }
+}
 
 const queryCache = new QueryCache()
 const queryClient = new QueryClient({
   queryCache,
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    }
-  }
+  defaultOptions: defaultQueryOptions,
 })
 
 const atomsProviderInitialValue = [[queryClientAtom, queryClient]] as const
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = (props) => {
+  const { Component, pageProps } = props
   const [isMounted, setIsMounted] = useState(false)
+
+  hydrate(queryClient, props.pageProps.dehydratedState)
+
+  const routeChangeCompleteHandler = () => {
+    NProgress.done();
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', NProgress.start);
+    Router.events.on('routeChangeComplete', routeChangeCompleteHandler);
+    Router.events.on('routeChangeError', NProgress.done);
+    return () => {
+      Router.events.off('routeChangeStart', NProgress.start);
+      Router.events.off('routeChangeComplete', routeChangeCompleteHandler);
+      Router.events.off('routeChangeError', NProgress.done);
+    }
+  }, [])
 
   useEffect(() => {
     setIsMounted(true)
@@ -28,10 +57,12 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider initialValues={atomsProviderInitialValue}>
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </Provider>
+      <Hydrate state={props.dehydratedState}>
+        <Provider initialValues={atomsProviderInitialValue}>
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </Provider>
+      </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
