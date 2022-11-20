@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUsers, useUsersJotai } from 'user/queries'
+// import { useUsers, useUsersJotai } from 'user/queries'
 import { UsersPreview } from '../components'
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -14,7 +14,7 @@ const BasicUsageContainer = () => {
   * - Need to handle state manually (can be useState, jotai, context, etc)
   * 
   */
-  const query = useUsers()
+  // const query = useUsers()
 
   /**
    * Alternative-2 : Integrated jotai with useQuery
@@ -26,11 +26,11 @@ const BasicUsageContainer = () => {
    * - Hard to do a dynamic config (staleTime, on Success, etc)
    * 
    */
-  const queryJotai = useUsersJotai()
+  // const queryJotai = useUsersJotai()
 
   return (
     <Stack spacing={2}>
-      <Typography variant='h5'>Basic Usage</Typography>
+      <Typography variant={'h5'}>{'Basic Usage'}</Typography>
       <UsersPreview />
     </Stack>
   )

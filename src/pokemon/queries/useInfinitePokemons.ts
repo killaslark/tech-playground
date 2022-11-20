@@ -1,7 +1,7 @@
-import { useMemo } from "react"
+import { useMemo } from 'react'
 
-import { GetNextPageParamFunction, useInfiniteQuery, UseInfiniteQueryOptions } from "@tanstack/react-query"
-import getPokemons, { GetPokemonsRequest, GetPokemonsResponse, GET_POKEMONS_API } from "pokemon/services/getPokemons"
+import { GetNextPageParamFunction, useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query'
+import getPokemons, { GetPokemonsRequest, GetPokemonsResponse, GET_POKEMONS_API } from 'pokemon/services/getPokemons'
 
 type UseInfinitePokemonsKeys = [string, GetPokemonsRequest]
 type UseInfinitePokemonsOptions = UseInfiniteQueryOptions<
@@ -24,7 +24,9 @@ const useInfinitePokemons = (request: GetPokemonsRequest, config?: UseInfinitePo
     const totalLastPageResults = lastPage?.results.length
     const totalAllPages = allPages?.length
 
-    if (totalLastPageResults === itemPerPage) return totalAllPages + 1
+    if (totalLastPageResults === itemPerPage) {
+return totalAllPages + 1
+}
   }
 
   const query = useInfiniteQuery(queryKey, fetchPokemon, {

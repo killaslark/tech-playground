@@ -12,7 +12,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import GlobalStyles from 'styles/global';
-import createIDBPersister from '@core/query/persist-query';
+// import createIDBPersister from '@core/query/persist-query';
 // import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 
 const defaultQueryOptions = {
@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
 
 const atomsProviderInitialValue = [[queryClientAtom, queryClient]] as const
 
-const persister = createIDBPersister()
+// const persister = createIDBPersister()
 
 const MyApp = (props) => {
   const { Component, pageProps } = props
@@ -60,7 +60,9 @@ const MyApp = (props) => {
     setIsMounted(true)
   }, [])
 
-  if (!isMounted) return null
+  if (!isMounted) {
+    return null
+  }
 
   return (
     // <PersistQueryClientProvider

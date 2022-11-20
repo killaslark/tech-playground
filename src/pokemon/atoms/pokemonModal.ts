@@ -1,5 +1,4 @@
-import { atom } from "jotai";
-import { Pokemon } from "pokemon/services/getPokemonDetail";
+import { atom } from 'jotai';
 
 interface PokemonModal {
   activePokemon: string | null

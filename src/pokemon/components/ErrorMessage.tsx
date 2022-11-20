@@ -1,13 +1,13 @@
 import React from 'react'
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const ErrorMessage = () => {
   return (
     <Container>
       <ErrorMessageContainer>
-        <img src={"/img-pikachu-sad-min.png"} width="32" height="32" alt="Pikachu" />
-        <span>Oops, pokémon not found!</span>
+        <img src={'/img-pikachu-sad-min.png'} width={'32'} height={'32'} alt={'Pikachu'} />
+        <span>{'Oops, pokémon not found!'}</span>
       </ErrorMessageContainer>
     </Container>
   );

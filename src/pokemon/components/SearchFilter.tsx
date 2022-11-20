@@ -1,13 +1,13 @@
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { pokemonTypeAtom } from "pokemon/atoms/pokemonFilter";
-import { POKEMON_TYPES } from "pokemon/constants";
+import { pokemonTypeAtom } from 'pokemon/atoms/pokemonFilter';
+import { POKEMON_TYPES } from 'pokemon/constants';
 
-import PokemonType from "./PokemonType";
-import Slide from "./Slide";
+import PokemonType from './PokemonType';
+import Slide from './Slide';
 
 const SearchFilter = () => {
   const [activeType, setActiveType] = useAtom(pokemonTypeAtom)
@@ -21,7 +21,7 @@ const SearchFilter = () => {
   }
   return (
     <Container>
-      <Title>Select Pokemon Type</Title>
+      <Title>{'Select Pokemon Type'}</Title>
       <Slide>
         {POKEMON_TYPES.map(({ name }) => (
           <PokemonType

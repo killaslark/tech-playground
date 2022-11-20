@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 
 interface Props {
@@ -39,7 +39,7 @@ const Container = styled.div<{ width: number | string, height: number | string, 
     min-width: ${({ width }) => width};
     min-height: ${({ height }) => height};
     grid-area: 1/1;
-    opacity: ${({ skeleton }) => (skeleton ? "0" : "1")};
+    opacity: ${({ skeleton }) => (skeleton ? '0' : '1')};
     transition: 0.2s;
   }
 `;

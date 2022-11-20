@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAtom } from 'jotai';
 
-import UpArrowIcon from "pokemon/assets/icons/icon-arrow-up.svg";
+import UpArrowIcon from 'pokemon/assets/icons/icon-arrow-up.svg';
 import pokemonModal from 'pokemon/atoms/pokemonModal';
 import { Header, Pokedex, PokemonModal } from 'pokemon/components';
 
@@ -25,7 +25,7 @@ const PokemonListContainer = () => {
       <Pokedex />
       {showModal && <PokemonModal />}
       <button
-        className="button"
+        className={'button'}
         style={{
           background: '#2f5aff',
           border: 'none',

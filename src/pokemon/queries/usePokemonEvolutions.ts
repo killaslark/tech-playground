@@ -1,5 +1,5 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import getPokemonEvolutions, { GetPokemonEvolutionsRequest, GetPokemonEvolutionsResponse, GET_POKEMON_EVOLUTIONS_API } from "pokemon/services/getPokemonEvolutions";
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import getPokemonEvolutions, { GetPokemonEvolutionsRequest, GetPokemonEvolutionsResponse, GET_POKEMON_EVOLUTIONS_API } from 'pokemon/services/getPokemonEvolutions';
 
 type UsePokemonEvolutionsKey = [string, GetPokemonEvolutionsRequest]
 

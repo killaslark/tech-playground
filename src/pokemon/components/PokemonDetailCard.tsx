@@ -2,20 +2,20 @@ import React, { SyntheticEvent, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 import startCase from 'lodash/startCase';
 
-import { useMedia } from "@core/hooks";
+import { useMedia } from '@core/hooks';
 
-import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail } from "pokemon/queries";
+import LeftArrowIcon from 'pokemon/assets/icons/icon-arrow-left.svg';
+import RightArrowIcon from 'pokemon/assets/icons/icon-arrow-right.svg';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail } from 'pokemon/queries';
 
-import Loading from "./Loading";
-import PokemonType from "./PokemonType";
-import SkeletonLoading from "./SkeletonLoading";
+import Loading from './Loading';
+import PokemonType from './PokemonType';
+import SkeletonLoading from './SkeletonLoading';
 
 
 const PokemonDetailCard = () => {
@@ -87,11 +87,11 @@ const Slide: React.FC<any> = (props) => {
     setChildWidth(document.getElementById('pokemon-detail-slider').children?.[0]?.clientWidth + 8)
   }, [])
 
-  const mobile = useMedia("(max-width: 31.25rem)");
+  const mobile = useMedia('(max-width: 31.25rem)');
 
   const slideNavigation = ({ currentTarget }: SyntheticEvent) => {
     const direction = (currentTarget as HTMLButtonElement).value;
-    if (direction === "next") {
+    if (direction === 'next') {
       if (slidePosition <= -sliderWidth + childWidth) {
         setSlidePosition(-sliderWidth)
       } else {
@@ -118,7 +118,7 @@ const Slide: React.FC<any> = (props) => {
     <SliderContainer>
       {!mobile && (
         <SliderButton
-          value="prev"
+          value={'prev'}
           onClick={slideNavigation}
           disabled={slidePosition >= 0}
         >
@@ -126,13 +126,13 @@ const Slide: React.FC<any> = (props) => {
         </SliderButton>
       )}
       <Slider>
-        <SliderContent id='pokemon-detail-slider' slidePosition={slidePosition / 16}>
+        <SliderContent id={'pokemon-detail-slider'} slidePosition={slidePosition / 16}>
           {props.children}
         </SliderContent>
       </Slider>
       {!mobile && (
         <SliderButton
-          value="next"
+          value={'next'}
           onClick={slideNavigation}
           disabled={slidePosition <= -sliderWidth + childWidth}
         >

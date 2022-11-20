@@ -1,18 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
 import Fuse from 'fuse.js';
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { currentPageAtom, pokemonSearchQueryAtom, pokemonTypeAtom } from "pokemon/atoms/pokemonFilter";
-import { usePokemons, usePokemonsByType } from "pokemon/queries";
+import { currentPageAtom, pokemonSearchQueryAtom, pokemonTypeAtom } from 'pokemon/atoms/pokemonFilter';
+import { usePokemons, usePokemonsByType } from 'pokemon/queries';
 
-import ErrorMessage from "./ErrorMessage";
-import Loading from "./Loading";
-import Pagination from "./Pagination";
-import PokemonCard from "./PokemonCard";
+import ErrorMessage from './ErrorMessage';
+import Loading from './Loading';
+import Pagination from './Pagination';
+import PokemonCard from './PokemonCard';
 
 const searchKeyweights = [
   {
@@ -68,13 +68,15 @@ const PokedexV2: React.FC = () => {
     return searchResult.map(res => res.item);
   }, [searchResult])
 
-  if (isError) return <ErrorMessage />;
+  if (isError) {
+return <ErrorMessage />;
+}
 
   const usedList = query ? fuzzyResult : pokemonList
 
   return (
     <PokedexContainer>
-      <div className="main-container">
+      <div className={'main-container'}>
         {isLoading ? (
           <Loading />
         ) : (

@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { useMedia } from '@core/hooks';
-
-import { ErrorMessage, PokemonDetailBanner, PokemonDetailStatusCard, PokemonEvolutions } from "pokemon/components";
-import { usePokemonDetail } from "pokemon/queries";
+import { ErrorMessage, PokemonDetailBanner, PokemonDetailStatusCard, PokemonEvolutions } from 'pokemon/components';
+import { usePokemonDetail } from 'pokemon/queries';
 
 const PokemonDetailContainer = () => {
   const router = useRouter()

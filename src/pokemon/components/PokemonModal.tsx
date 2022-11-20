@@ -1,29 +1,29 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
-import { useMedia } from "@core/hooks";
+import { useMedia } from '@core/hooks';
 
-import DividerIcon from "pokemon/assets/icons/divider-pokeball.svg";
-import BoltIcon from "pokemon/assets/icons/icon-bolt.svg";
-import CloseIcon from "pokemon/assets/icons/icon-close.svg";
-import RulerIcon from "pokemon/assets/icons/icon-ruler.svg";
-import WeightIcon from "pokemon/assets/icons/icon-weight.svg";
-import pokemonModal from "pokemon/atoms/pokemonModal";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail } from "pokemon/queries";
+import DividerIcon from 'pokemon/assets/icons/divider-pokeball.svg';
+import BoltIcon from 'pokemon/assets/icons/icon-bolt.svg';
+import CloseIcon from 'pokemon/assets/icons/icon-close.svg';
+import RulerIcon from 'pokemon/assets/icons/icon-ruler.svg';
+import WeightIcon from 'pokemon/assets/icons/icon-weight.svg';
+import pokemonModal from 'pokemon/atoms/pokemonModal';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail } from 'pokemon/queries';
 
-import PokemonType from "./PokemonType";
-import SkeletonLoading from "./SkeletonLoading";
+import PokemonType from './PokemonType';
+import SkeletonLoading from './SkeletonLoading';
 
 
 const PokemonModal = () => {
   const [modalState, setModalState] = useAtom(pokemonModal);
-  const mobile = useMedia("(max-width: 980px)");
+  const mobile = useMedia('(max-width: 980px)');
 
   const onCloseModal = () => setModalState({
     activePokemon: null
@@ -50,18 +50,18 @@ const PokemonModal = () => {
 
   const formatStatName = (statName: string) => {
     switch (statName) {
-      case "hp":
-        return "HP";
-      case "attack":
-        return "Attack";
-      case "defense":
-        return "Defense";
-      case "special-attack":
-        return "Sp. Atk";
-      case "special-defense":
-        return "Sp. Def";
-      case "speed":
-        return "Speed";
+      case 'hp':
+        return 'HP';
+      case 'attack':
+        return 'Attack';
+      case 'defense':
+        return 'Defense';
+      case 'special-attack':
+        return 'Sp. Atk';
+      case 'special-defense':
+        return 'Sp. Def';
+      case 'speed':
+        return 'Speed';
     }
   };
 
@@ -86,16 +86,16 @@ const PokemonModal = () => {
             <PokemonWeight>
               <div>
                 <WeightIcon />
-                <span>{`${pokemon.weight / 10}`} kg</span>
+                <span>{`${pokemon.weight / 10}`}{' kg'}</span>
               </div>
-              <span>Weight</span>
+              <span>{'Weight'}</span>
             </PokemonWeight>
             <PokemonHeight>
               <div>
                 <RulerIcon />
-                <span>{`${pokemon.height / 10}`} m</span>
+                <span>{`${pokemon.height / 10}`}{' m'}</span>
               </div>
-              <span>Height</span>
+              <span>{'Height'}</span>
             </PokemonHeight>
           </PokemonFeatures>
         </PokemonData>
@@ -106,11 +106,11 @@ const PokemonModal = () => {
 
         <PokemonStats>
           <StatsActionContainer>
-            <StatsTitle>Status</StatsTitle>
+            <StatsTitle>{'Status'}</StatsTitle>
             <Link passHref href={`/pokemon/detail/${pokemonName}`}>
-              <button className="button" onClick={onCloseModal}>
+              <button className={'button'} onClick={onCloseModal}>
                 <BoltIcon />
-                See Detail
+                {'See Detail'}
               </button>
             </Link>
           </StatsActionContainer>
@@ -146,7 +146,7 @@ interface CloseButtonProps {
 }
 const CloseButton: React.FC<CloseButtonProps> = (props) => {
   const { onPress } = props;
-  const mobile = useMedia("(max-width: 980px)");
+  const mobile = useMedia('(max-width: 980px)');
 
   return (
     <CloseButtonWrapper onClick={onPress} mobile={mobile}>
@@ -166,7 +166,7 @@ const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: ${() => (window.innerHeight < 650 ? "flex-start" : "center")};
+  align-items: ${() => (window.innerHeight < 650 ? 'flex-start' : 'center')};
 
   overflow-y: scroll;
 
@@ -207,7 +207,7 @@ const Modal = styled.div`
   opacity: 0;
   transform: scale(0.8);
   animation: ${modal} 0.4s forwards;
-  margin: ${() => (window.innerHeight < 650 ? "12.87rem 1rem 7rem" : "0")};
+  margin: ${() => (window.innerHeight < 650 ? '12.87rem 1rem 7rem' : '0')};
 
   @media (max-width: 62.5rem) {
     width: 100%;
@@ -450,13 +450,13 @@ const progressBar = keyframes`
 
 const ProgressBarFill = styled.div<{ base_stat: number }>`
   width: ${(props) =>
-    props.base_stat >= 100 ? "100%" : `${props.base_stat}%`};
-  background: ${(props) => (props.base_stat >= 50 ? "#1CD80E" : "#FF364E")};
+    props.base_stat >= 100 ? '100%' : `${props.base_stat}%`};
+  background: ${(props) => (props.base_stat >= 50 ? '#1CD80E' : '#FF364E')};
   box-shadow: 0 0 0.75rem 0.25rem
     ${(props) =>
     props.base_stat >= 50
-      ? "rgba(28, 216, 14, 0.25)"
-      : "rgba(255, 54, 78, 0.25)"};
+      ? 'rgba(28, 216, 14, 0.25)'
+      : 'rgba(255, 54, 78, 0.25)'};
   height: 0.5rem;
   border-radius: 0.25rem;
   transform: translate3d(-100%, 0, 0);
@@ -467,7 +467,7 @@ const CloseButtonWrapper = styled.button<{ mobile: boolean }>`
   background: none;
   position: absolute;
   top: 1.5rem;
-  right: ${(props) => (props.mobile ? "1rem " : "1.5rem")};
+  right: ${(props) => (props.mobile ? '1rem ' : '1.5rem')};
 
   svg {
     width: 3rem;

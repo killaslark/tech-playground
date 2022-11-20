@@ -8,18 +8,18 @@ const Navbar = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav">
+      <AppBar component={'nav'}>
         <Toolbar>
           <Typography
-            variant="h6"
-            component="div"
+            variant={'h6'}
+            component={'div'}
             sx={{ flexGrow: 1, display: 'block' }}
           >
-            React Query Introduction
+            {'React Query Introduction'}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component={'main'} sx={{ p: 3 }}>
         <Toolbar />
       </Box>
     </Box>

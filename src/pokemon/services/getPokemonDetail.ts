@@ -1,4 +1,4 @@
-import { pokemonApiInstance } from "@core/services"
+import { pokemonApiInstance } from '@core/services'
 
 
 export interface PokemonStatus {

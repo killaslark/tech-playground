@@ -2,18 +2,16 @@ import React from 'react';
 
 import { useAtom } from 'jotai';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import usePagination from "@mui/material/usePagination/usePagination";
+import usePagination from '@mui/material/usePagination/usePagination';
 
-import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
+import LeftArrowIcon from 'pokemon/assets/icons/icon-arrow-left.svg';
+import RightArrowIcon from 'pokemon/assets/icons/icon-arrow-right.svg';
 
 import { currentPageAtom } from 'pokemon/atoms/pokemonFilter';
 
-interface Props {
-}
-const Pagination: React.FC<Props> = () => {
+const Pagination: React.FC = () => {
   const [paging, setPaging] = useAtom(currentPageAtom)
 
   const { items } = usePagination({
@@ -41,7 +39,7 @@ const Pagination: React.FC<Props> = () => {
           switch (type) {
             case 'start-ellipsis':
             case 'end-ellipsis':
-              children = (<Ellipsis>...</Ellipsis>)
+              children = (<Ellipsis>{'...'}</Ellipsis>)
               break;
             case 'page':
               children = (
@@ -53,7 +51,7 @@ const Pagination: React.FC<Props> = () => {
             default:
               children = (
                 <PagingButton {...item} navigation>
-                  {type === "previous" ? <LeftArrowIcon /> : <RightArrowIcon />}
+                  {type === 'previous' ? <LeftArrowIcon /> : <RightArrowIcon />}
                 </PagingButton>
               )
           }
@@ -86,10 +84,10 @@ const PagingButton = styled.button<{
   selected?: boolean;
   navigation?: boolean;
 }>`
-  width: ${(props) => (props.navigation ? "2rem" : "2.5rem")};
-  height: ${(props) => (props.navigation ? "2rem" : "2.5rem")};
-  background: ${(props) => (props.selected ? "#2F5AFF" : "none")};
-  border: ${(props) => (props.navigation ? "none" : "0.13rem solid #fff;")};
+  width: ${(props) => (props.navigation ? '2rem' : '2.5rem')};
+  height: ${(props) => (props.navigation ? '2rem' : '2.5rem')};
+  background: ${(props) => (props.selected ? '#2F5AFF' : 'none')};
+  border: ${(props) => (props.navigation ? 'none' : '0.13rem solid #fff;')};
   border-radius: 0.5rem;
 
   font-family: "Montserrat";

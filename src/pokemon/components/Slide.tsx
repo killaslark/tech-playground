@@ -1,21 +1,21 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { useMedia } from "@core/hooks";
+import { useMedia } from '@core/hooks';
 
-import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
+import LeftArrowIcon from 'pokemon/assets/icons/icon-arrow-left.svg';
+import RightArrowIcon from 'pokemon/assets/icons/icon-arrow-right.svg';
 
 
 const Slide: React.FC<any> = (props) => {
   const [slidePosition, setSlidePosition] = useState(0);
-  const mobile = useMedia("(max-width: 31.25rem)");
+  const mobile = useMedia('(max-width: 31.25rem)');
 
   const slideNavigation = ({ currentTarget }: SyntheticEvent) => {
     const direction = (currentTarget as HTMLButtonElement).value;
 
-    direction === "next"
+    direction === 'next'
       ? setSlidePosition(slidePosition <= -87.5 ? -87.5 : slidePosition - 12.5)
       : setSlidePosition(slidePosition === 0 ? 0 : slidePosition + 12.5);
   };
@@ -24,7 +24,7 @@ const Slide: React.FC<any> = (props) => {
     <Container>
       {!mobile && (
         <Button
-          value="prev"
+          value={'prev'}
           onClick={slideNavigation}
           disabled={slidePosition === 0 && true}
         >
@@ -38,7 +38,7 @@ const Slide: React.FC<any> = (props) => {
       </Slider>
       {!mobile && (
         <Button
-          value="next"
+          value={'next'}
           onClick={slideNavigation}
           disabled={slidePosition === -87.5 && true}
         >

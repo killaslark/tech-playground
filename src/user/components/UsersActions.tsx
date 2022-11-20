@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUsers, useUsersJotai } from '../queries'
+import { useUsers } from '../queries'
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -34,7 +34,7 @@ const UsersActions = () => {
   })
 
   // alt-2
-  const queryJotai = useUsersJotai()
+  // const queryJotai = useUsersJotai()
 
   const { isLoading, isFetching, isRefetching, refetch, queryKey } = query
 
@@ -60,26 +60,26 @@ const UsersActions = () => {
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
-              <StyledTableCell align='center'>isLoading</StyledTableCell>
-              <StyledTableCell align='center'>isFetching</StyledTableCell>
-              <StyledTableCell align='center'>isRefetching</StyledTableCell>
+              <StyledTableCell align={'center'}>{'isLoading'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'isFetching'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'isRefetching'}</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <StyledTableCell align='center'>{isLoading && <CircularProgress />}</StyledTableCell>
-              <StyledTableCell align='center'>{isFetching && <CircularProgress />}</StyledTableCell>
-              <StyledTableCell align='center'>{isRefetching && <CircularProgress />}</StyledTableCell>
+              <StyledTableCell align={'center'}>{isLoading && <CircularProgress />}</StyledTableCell>
+              <StyledTableCell align={'center'}>{isFetching && <CircularProgress />}</StyledTableCell>
+              <StyledTableCell align={'center'}>{isRefetching && <CircularProgress />}</StyledTableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      <Stack spacing={2} direction="row">
-        <Button onClick={refetchWithQueryResult} variant="contained">Query Result Refetch</Button>
-        <Button onClick={invalidateQueries} variant="contained">Query Client Invalidate Query</Button>
-        <Button onClick={refetchWithQueryClient} variant="contained">Query Client Refetch</Button>
-        <Button onClick={resetQuery} variant="contained">Query Client Reset Query</Button>
+      <Stack spacing={2} direction={'row'}>
+        <Button onClick={refetchWithQueryResult} variant={'contained'}>{'Query Result Refetch'}</Button>
+        <Button onClick={invalidateQueries} variant={'contained'}>{'Query Client Invalidate Query'}</Button>
+        <Button onClick={refetchWithQueryClient} variant={'contained'}>{'Query Client Refetch'}</Button>
+        <Button onClick={resetQuery} variant={'contained'}>{'Query Client Reset Query'}</Button>
       </Stack>
     </Stack>
   )

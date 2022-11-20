@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
-import RulerIcon from "pokemon/assets/icons/icon-ruler.svg";
-import WeightIcon from "pokemon/assets/icons/icon-weight.svg";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail } from "pokemon/queries";
+import RulerIcon from 'pokemon/assets/icons/icon-ruler.svg';
+import WeightIcon from 'pokemon/assets/icons/icon-weight.svg';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail } from 'pokemon/queries';
 
 const PokemonDetailStatusCard = () => {
   const { query } = useRouter()
@@ -19,18 +19,18 @@ const PokemonDetailStatusCard = () => {
 
   const formatStatName = (statName: string) => {
     switch (statName) {
-      case "hp":
-        return "HP";
-      case "attack":
-        return "Attack";
-      case "defense":
-        return "Defense";
-      case "special-attack":
-        return "Sp. Atk";
-      case "special-defense":
-        return "Sp. Def";
-      case "speed":
-        return "Speed";
+      case 'hp':
+        return 'HP';
+      case 'attack':
+        return 'Attack';
+      case 'defense':
+        return 'Defense';
+      case 'special-attack':
+        return 'Sp. Atk';
+      case 'special-defense':
+        return 'Sp. Def';
+      case 'speed':
+        return 'Speed';
     }
   };
 
@@ -49,7 +49,7 @@ const PokemonDetailStatusCard = () => {
       <CardOverlay color={primaryType.color} />
       <Modal>
         <PokemonStats>
-          <StatsTitle>Stats</StatsTitle>
+          <StatsTitle>{'Stats'}</StatsTitle>
           <StatsList>
             {pokemon.stats.map(({ stat, baseStat }) =>
               React.Children.toArray(
@@ -69,16 +69,16 @@ const PokemonDetailStatusCard = () => {
             <PokemonWeight>
               <div>
                 <WeightIcon />
-                <span>{`${pokemon.weight / 10}`} kg</span>
+                <span>{`${pokemon.weight / 10}`}{' kg'}</span>
               </div>
-              <span>Weight</span>
+              <span>{'Weight'}</span>
             </PokemonWeight>
             <PokemonHeight>
               <div>
                 <RulerIcon />
-                <span>{`${pokemon.height / 10}`} m</span>
+                <span>{`${pokemon.height / 10}`}{' m'}</span>
               </div>
-              <span>Height</span>
+              <span>{'Height'}</span>
             </PokemonHeight>
           </PokemonFeatures>
         </PokemonStats>
@@ -236,7 +236,7 @@ const ProgressBar = styled.div<{ baseStat: number }>`
   height: 15rem;
   width: 6rem;
   border-radius: 0.25rem;
-  background: ${(props) => (props.baseStat >= 50 ? "#1CD80E" : "#FF364E")};
+  background: ${(props) => (props.baseStat >= 50 ? '#1CD80E' : '#FF364E')};
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -254,13 +254,13 @@ const progressBar = keyframes`
 
 const ProgressBarFill = styled.div<{ baseStat: number }>`
   height: ${(props) =>
-    props.baseStat >= 100 ? "0%" : `${100 - props.baseStat}%`};
+    props.baseStat >= 100 ? '0%' : `${100 - props.baseStat}%`};
   background: #555;
   box-shadow: 0 0 0.75rem 0.25rem
     ${(props) =>
     props.baseStat >= 50
-      ? "rgba(28, 216, 14, 0.25)"
-      : "rgba(255, 54, 78, 0.25)"};
+      ? 'rgba(28, 216, 14, 0.25)'
+      : 'rgba(255, 54, 78, 0.25)'};
   width: 6rem;
   border-radius: -0.25rem;
   transform: translate3d(0, -100%, 0);

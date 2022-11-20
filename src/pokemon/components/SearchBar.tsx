@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styled from "styled-components";
+import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
 import SearchInput from './SearchInput';
 
@@ -10,7 +10,7 @@ interface Props {
 
 const SearchBar: React.FC<Props> = props => {
   return (
-    <div className="main-container" ref={props.searchBarRef}>
+    <div className={'main-container'} ref={props.searchBarRef}>
       <Container>
         <SearchFilter />
         <SearchInput />

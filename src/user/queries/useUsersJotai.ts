@@ -1,5 +1,5 @@
-import { useAtom } from "jotai"
-import { usersAtom } from "user/atoms"
+import { useAtom } from 'jotai'
+import { usersAtom } from 'user/atoms'
 
 const useUsersJotai = () => {
   const [, queryAtom] = usersAtom

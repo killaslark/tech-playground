@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 import startCase from 'lodash/startCase';
 
-import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail, usePokemonEvolutions, usePokemonSpeciesDetail } from "pokemon/queries";
+import RightArrowIcon from 'pokemon/assets/icons/icon-arrow-right.svg';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail, usePokemonEvolutions, usePokemonSpeciesDetail } from 'pokemon/queries';
 import { PokemonEvolution } from 'pokemon/services/getPokemonEvolutions';
 
 import SkeletonLoading from './SkeletonLoading';
@@ -65,7 +65,7 @@ const PokemonEvolutions = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexWrap: 'wrap' }}>
           {evolutions.evolvesTo.map(evl => (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div key={evl.species?.name} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <RightArrowIcon />
               {recursiveRender(evl)}
             </div>
@@ -78,7 +78,7 @@ const PokemonEvolutions = () => {
   return (
     <Container primaryColor={primaryType?.color} secondaryColor={secondaryType?.color}>
       <CardOverlay color={primaryType.color} />
-      <EvolutionsTitle>Evolution Chain</EvolutionsTitle>
+      <EvolutionsTitle>{'Evolution Chain'}</EvolutionsTitle>
       {recursiveRender(evolutions.chain)}
     </Container>
   );

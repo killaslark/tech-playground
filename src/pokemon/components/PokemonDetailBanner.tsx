@@ -1,23 +1,23 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import startCase from 'lodash/startCase';
 
-import pokeballBackground from "pokemon/assets/icons/background-pokeball.svg";
-import DividerIcon from "pokemon/assets/icons/divider-pokeball.svg";
-import LeftArrowIcon from "pokemon/assets/icons/icon-arrow-left.svg";
-import RightArrowIcon from "pokemon/assets/icons/icon-arrow-right.svg";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail, usePokemonSpeciesDetail } from "pokemon/queries";
+import pokeballBackground from 'pokemon/assets/icons/background-pokeball.svg';
+import DividerIcon from 'pokemon/assets/icons/divider-pokeball.svg';
+import LeftArrowIcon from 'pokemon/assets/icons/icon-arrow-left.svg';
+import RightArrowIcon from 'pokemon/assets/icons/icon-arrow-right.svg';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail, usePokemonSpeciesDetail } from 'pokemon/queries';
 
-import { useMedia } from "@core/hooks";
+import { useMedia } from '@core/hooks';
 
-import { SkeletonLoading, Waves } from ".";
-import Header from "./Header";
-import PokemonType from "./PokemonType";
+import { SkeletonLoading, Waves } from '.';
+import Header from './Header';
+import PokemonType from './PokemonType';
 
 const PokemonDetailBanner = () => {
   const router = useRouter()
@@ -57,7 +57,7 @@ const PokemonDetailBanner = () => {
   return (
     <Container primaryColor={primaryType?.color} secondaryColor={secondaryType?.color}>
       <Header />
-      <div className="main-container">
+      <div className={'main-container'}>
         <Content>
           <PokemonData>
             <PokemonNumber>{formatPokemonId(pokemon.id)}</PokemonNumber>
@@ -114,11 +114,11 @@ const Slide: React.FC<any> = (props) => {
     setChildWidth(document.getElementById('pokemon-detail-slider').children?.[0]?.clientWidth + 8)
   }, [])
 
-  const mobile = useMedia("(max-width: 31.25rem)");
+  const mobile = useMedia('(max-width: 31.25rem)');
 
   const slideNavigation = ({ currentTarget }: SyntheticEvent) => {
     const direction = (currentTarget as HTMLButtonElement).value;
-    if (direction === "next") {
+    if (direction === 'next') {
       if (slidePosition <= -sliderWidth + childWidth) {
         setSlidePosition(-sliderWidth)
       } else {
@@ -145,7 +145,7 @@ const Slide: React.FC<any> = (props) => {
     <SliderContainer>
       {!mobile && (
         <SliderButton
-          value="prev"
+          value={'prev'}
           onClick={slideNavigation}
           disabled={slidePosition >= 0}
         >
@@ -153,13 +153,13 @@ const Slide: React.FC<any> = (props) => {
         </SliderButton>
       )}
       <Slider>
-        <SliderContent id='pokemon-detail-slider' slidePosition={slidePosition / 16}>
+        <SliderContent id={'pokemon-detail-slider'} slidePosition={slidePosition / 16}>
           {props.children}
         </SliderContent>
       </Slider>
       {!mobile && (
         <SliderButton
-          value="next"
+          value={'next'}
           onClick={slideNavigation}
           disabled={slidePosition <= -sliderWidth + childWidth}
         >

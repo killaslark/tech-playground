@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 const Loading = () => {
   return (
     <Container>
       <LoadingContainer>
-        <div className="lds-roller">
+        <div className={'lds-roller'}>
           <div />
           <div />
           <div />

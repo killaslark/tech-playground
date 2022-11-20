@@ -1,17 +1,13 @@
-import { useState } from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
 import debounce from 'lodash/debounce'
 
-import SearchIcon from 'pokemon/assets/icons/icon-search.svg';
-import { pokemonSearchQueryAtom } from "pokemon/atoms/pokemonFilter";
+import { pokemonSearchQueryAtom } from 'pokemon/atoms/pokemonFilter';
 
 const SearchInput = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [, setQuery] = useAtom(pokemonSearchQueryAtom)
+  const [query, setQuery] = useAtom(pokemonSearchQueryAtom)
 
 
   const handleSubmit = (e) => {
@@ -23,9 +19,9 @@ const SearchInput = () => {
   return (
     <Container>
       <InputText
-        defaultValue={inputValue}
+        defaultValue={query}
         onChange={debounceSubmit}
-        placeholder="Search Pokemon"
+        placeholder={'Search Pokemon'}
         required
       />
     </Container>
@@ -68,17 +64,5 @@ const InputText = styled.input`
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.25);
-  }
-`;
-
-const SearchButton = styled.button`
-  width: 3.5rem;
-  height: 3.5rem;
-  background: #2f5aff;
-  border-radius: 0 0.5rem 0.5rem 0;
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
   }
 `;

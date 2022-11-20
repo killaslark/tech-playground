@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUsers, useUsersJotai } from '../queries'
+import { useUsers } from '../queries'
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -25,7 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const UsersPreview = () => {
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   // alt-1
   const query = useUsers({
@@ -33,7 +33,7 @@ const UsersPreview = () => {
   })
 
   // alt-2
-  const queryJotai = useUsersJotai()
+  // const queryJotai = useUsersJotai()
 
   const { data, isLoading } = query
 
@@ -43,27 +43,27 @@ const UsersPreview = () => {
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
-              <StyledTableCell align='center'>ID</StyledTableCell>
-              <StyledTableCell align='center'>Name</StyledTableCell>
-              <StyledTableCell align='center'>Address</StyledTableCell>
-              <StyledTableCell align='center'>Email</StyledTableCell>
-              <StyledTableCell align='center'>Phone</StyledTableCell>
+              <StyledTableCell align={'center'}>{'ID'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'Name'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'Address'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'Email'}</StyledTableCell>
+              <StyledTableCell align={'center'}>{'Phone'}</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {isLoading ? (
               <TableRow >
-                <StyledTableCell colSpan={5} align='center' component="th" scope="row">
+                <StyledTableCell colSpan={5} align={'center'} component={'th'} scope={'row'}>
                   <CircularProgress />
                 </StyledTableCell>
               </TableRow>
             ) : data.map(user => (
               <TableRow key={user.id}>
-                <StyledTableCell align='center'>{user.id}</StyledTableCell>
-                <StyledTableCell align='center'>{user.name}</StyledTableCell>
-                <StyledTableCell align='center'>{user.address.city}</StyledTableCell>
-                <StyledTableCell align='center'>{user.email}</StyledTableCell>
-                <StyledTableCell align='center'>{user.phone}</StyledTableCell>
+                <StyledTableCell align={'center'}>{user.id}</StyledTableCell>
+                <StyledTableCell align={'center'}>{user.name}</StyledTableCell>
+                <StyledTableCell align={'center'}>{user.address.city}</StyledTableCell>
+                <StyledTableCell align={'center'}>{user.email}</StyledTableCell>
+                <StyledTableCell align={'center'}>{user.phone}</StyledTableCell>
               </TableRow>
             ))}
           </TableBody>

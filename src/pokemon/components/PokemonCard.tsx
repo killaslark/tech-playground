@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
-import BoltIcon from "pokemon/assets/icons/icon-bolt.svg";
-import RulerIcon from "pokemon/assets/icons/icon-ruler.svg";
-import WeightIcon from "pokemon/assets/icons/icon-weight.svg";
-import pokemonModal from "pokemon/atoms/pokemonModal";
-import { POKEMON_TYPES } from "pokemon/constants";
-import { usePokemonDetail } from "pokemon/queries";
-import { PokemonUrl } from "pokemon/services/getPokemons";
+import BoltIcon from 'pokemon/assets/icons/icon-bolt.svg';
+import RulerIcon from 'pokemon/assets/icons/icon-ruler.svg';
+import WeightIcon from 'pokemon/assets/icons/icon-weight.svg';
+import pokemonModal from 'pokemon/atoms/pokemonModal';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import { usePokemonDetail } from 'pokemon/queries';
+import { PokemonUrl } from 'pokemon/services/getPokemons';
 
-import Loading from "./Loading";
-import PokemonType from "./PokemonType";
-import SkeletonLoading from "./SkeletonLoading";
+import Loading from './Loading';
+import PokemonType from './PokemonType';
+import SkeletonLoading from './SkeletonLoading';
 
 
 interface Props {
@@ -78,21 +78,21 @@ const PokemonCard = (props: Props) => {
         <PokemonWeight>
           <div>
             <WeightIcon />
-            <span>{`${pokemon.weight / 10}`} kg</span>
+            <span>{`${pokemon.weight / 10}`}{' kg'}</span>
           </div>
-          <span>Weight</span>
+          <span>{'Weight'}</span>
         </PokemonWeight>
         <PokemonHeight>
           <div>
             <RulerIcon />
-            <span>{`${pokemon.height / 10}`} m</span>
+            <span>{`${pokemon.height / 10}`}{' m'}</span>
           </div>
-          <span>Height</span>
+          <span>{'Height'}</span>
         </PokemonHeight>
       </PokemonFeatures>
       <MoreDetailsButton color={primaryType.color} onClick={onSeeDetail}>
         <BoltIcon />
-        See Stats
+        {'See Stats'}
       </MoreDetailsButton>
     </Container>
   );

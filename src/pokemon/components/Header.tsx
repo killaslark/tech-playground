@@ -1,12 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import PokemonLogo from "pokemon/assets/logos/logo-pokemon.svg";
+import PokemonLogo from 'pokemon/assets/logos/logo-pokemon.svg';
 
 const Header = () => {
   return (
-    <div className="main-container">
+    <div className={'main-container'}>
       <Container>
         <Link href={'/pokemon'}>
           <PokemonLogo />

@@ -1,5 +1,5 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query"
-import getUsers, { GetUsersAPIResponse, GET_USERS_API } from "../services/getUsers"
+import { useQuery, UseQueryOptions } from '@tanstack/react-query'
+import getUsers, { GetUsersAPIResponse, GET_USERS_API } from '../services/getUsers'
 
 type UseUsersQueryKeys = string[]
 type UseUsersOptions = UseQueryOptions<

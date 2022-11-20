@@ -1,17 +1,17 @@
 import React from 'react'
-import { useUsers, useUsersJotai } from 'user/queries'
+// import { useUsers, useUsersJotai } from 'user/queries'
 import Typography from '@mui/material/Typography';
 
 const UsersDelayedComponent = () => {
 
-  const query = useUsers({
-    staleTime: 6_000,
-  })
+  // const query = useUsers({
+  //   staleTime: 6_000,
+  // })
 
-  const queryJotai = useUsersJotai()
+  // const queryJotai = useUsersJotai()
 
   return (
-    <Typography>Delayed Component</Typography>
+    <Typography>{'Delayed Component'}</Typography>
   )
 }
 

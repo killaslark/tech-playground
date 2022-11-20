@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInterceptorOptions, AxiosRequestConfig } from "axios"
+import axios, { AxiosError, AxiosInterceptorOptions, AxiosRequestConfig } from 'axios'
 import applyCaseMiddleware from 'axios-case-converter';
 
 export const BASE_URL = 'https://pokeapi.co/api'

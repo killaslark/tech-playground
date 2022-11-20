@@ -1,4 +1,4 @@
-import { jsonPlaceholderInstance } from "@core/services"
+import { jsonPlaceholderInstance } from '@core/services'
 
 
 export interface Address {

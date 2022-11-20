@@ -1,14 +1,14 @@
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import HomeIcon from 'pokemon/assets/icons/icon-home.svg'
 
 
 const HomeButton = () => {
   return (
-    <Button className="button">
+    <Button className={'button'}>
       <HomeIcon />
-      Home
+      {'Home'}
     </Button>
   )
 }

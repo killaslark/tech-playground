@@ -1,23 +1,19 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { currentPageAtom } from "pokemon/atoms/pokemonFilter";
-import { useInfinitePokemons } from "pokemon/queries";
+import { currentPageAtom } from 'pokemon/atoms/pokemonFilter';
+import { useInfinitePokemons } from 'pokemon/queries';
 
-import ErrorMessage from "./ErrorMessage";
-import Loading from "./Loading";
-import PokemonCard from "./PokemonCard";
-import { InView } from "react-intersection-observer";
+import ErrorMessage from './ErrorMessage';
+import Loading from './Loading';
+import PokemonCard from './PokemonCard';
+import { InView } from 'react-intersection-observer';
 
-interface Props {
-
-};
-
-const Pokedex: React.FC<Props> = () => {
+const Pokedex: React.FC = () => {
   const [paging] = useAtom(currentPageAtom)
   const [shouldLoadMore, setShouldLoadMore] = useState(false)
 
@@ -35,11 +31,13 @@ const Pokedex: React.FC<Props> = () => {
     }
   }, [hasNextPage, shouldLoadMore, isFetchingNextPage])
 
-  if (isError) return <ErrorMessage />;
+  if (isError) {
+return <ErrorMessage />;
+}
 
   return (
     <PokedexContainer>
-      <div className="main-container">
+      <div className={'main-container'}>
         {isLoading ? (
           <Loading />
         ) : (
