@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className={'main-container'}>
       <Container>
-        <Link href={'/pokemon'}>
+        <Link href={'/'}>
           <PokemonLogo />
         </Link>
       </Container>
