@@ -15,7 +15,7 @@ const SearchBar: React.FC<Props> = (props) => {
       style={{
         position: 'sticky',
         top: 0,
-        zIndex: 9,
+        zIndex: 1,
         background: '#060B28',
         paddingTop: '2rem',
         gap: '1rem',
