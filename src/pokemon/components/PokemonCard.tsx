@@ -31,8 +31,6 @@ const PokemonCard = (props: Props) => {
     enabled: inView,
   });
 
-  console.log({ inView });
-
   const imageList = Object.values(pokemon?.sprites?.other?.home || {}).filter((value) => value);
 
   const handlePressImage = () => {
