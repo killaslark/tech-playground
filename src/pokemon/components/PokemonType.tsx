@@ -1,45 +1,41 @@
-import React from 'react'
+import { useRouter } from 'next/router';
+import { POKEMON_TYPES } from 'pokemon/constants';
+import React from 'react';
 import styled from 'styled-components';
 
-import { POKEMON_TYPES } from 'pokemon/constants';
-
-
-
 interface Props {
-  type: string
-  onPress?: (type: string) => void
-  reduceTabIndex?: boolean
+  type: string;
+  onPress?: (type: string) => void;
+  reduceTabIndex?: boolean;
   isActive?: boolean;
-};
+}
 const PokemonType: React.FC<Props> = (props) => {
   const { type, onPress, reduceTabIndex, isActive } = props;
-  const { name, color } = POKEMON_TYPES.find(
-    (item) => item.name === props.type
-  );
+  const { name, color } = POKEMON_TYPES.find((item) => item.name === props.type);
+
+  const router = useRouter();
 
   const handlePress = () => {
-    onPress?.(type)
-  }
+    if (typeof onPress !== 'undefined') {
+      onPress(type);
+    } else {
+      router.push(`/pokemon/type/${type}`);
+    }
+  };
 
   return (
-    <Type
-      isActive={isActive}
-      color={color}
-      onClick={handlePress}
-      tabIndex={reduceTabIndex ? 0 : -1}
-    >
+    <Type isActive={isActive} color={color} onClick={handlePress} tabIndex={reduceTabIndex ? 0 : -1}>
       <img src={`/pokemon-types/${name}.svg`} width={16} height={16} alt={name} />
       {name}
     </Type>
-  )
+  );
 };
 
 export default PokemonType;
 
-
-export const Type = styled.button<{ color: string, isActive: boolean }>`
+export const Type = styled.button<{ color: string; isActive: boolean }>`
   background: ${(props) => props.color};
-  opacity: ${({ isActive }) => isActive ? '1' : '0.7'};
+  opacity: ${({ isActive }) => (isActive ? '1' : '0.7')};
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -47,7 +43,7 @@ export const Type = styled.button<{ color: string, isActive: boolean }>`
   border-radius: 0.5rem;
   flex-shrink: 0;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-size: 1rem;
   line-height: 150%;
   font-weight: 400;

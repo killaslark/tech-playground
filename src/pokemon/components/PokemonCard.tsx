@@ -1,9 +1,4 @@
-import { useState } from 'react';
-
 import { useAtom } from 'jotai';
-
-import styled, { keyframes } from 'styled-components';
-
 import BoltIcon from 'pokemon/assets/icons/icon-bolt.svg';
 import RulerIcon from 'pokemon/assets/icons/icon-ruler.svg';
 import WeightIcon from 'pokemon/assets/icons/icon-weight.svg';
@@ -11,61 +6,67 @@ import pokemonModal from 'pokemon/atoms/pokemonModal';
 import { POKEMON_TYPES } from 'pokemon/constants';
 import { usePokemonDetail } from 'pokemon/queries';
 import { PokemonUrl } from 'pokemon/services/getPokemons';
-
+import { useState } from 'react';
+import { InView } from 'react-intersection-observer';
+import styled, { keyframes } from 'styled-components';
 import Loading from './Loading';
 import PokemonType from './PokemonType';
 import SkeletonLoading from './SkeletonLoading';
 
-
 interface Props {
   pokemon: PokemonUrl;
-};
+}
 
 const PokemonCard = (props: Props) => {
   const { pokemon: pokemonUrl } = props;
   const [, setModalState] = useAtom(pokemonModal);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [inView, setInView] = useState(false);
 
   const request = {
-    name: pokemonUrl.name
-  }
-  const { data: pokemon, isLoading } = usePokemonDetail(request);
-  const imageList = Object.values(pokemon?.sprites?.other?.home || {}).filter(value => value);
+    name: pokemonUrl.name,
+  };
+
+  const { data: pokemon, isLoading } = usePokemonDetail(request, {
+    enabled: inView,
+  });
+
+  console.log({ inView });
+
+  const imageList = Object.values(pokemon?.sprites?.other?.home || {}).filter((value) => value);
 
   const handlePressImage = () => {
-    setActiveImageIndex(prevActiveIndex => {
-      const newActiveIndex = prevActiveIndex === imageList.length - 1 ? 0 : prevActiveIndex + 1
-      return newActiveIndex
-    })
-  }
+    setActiveImageIndex((prevActiveIndex) => {
+      const newActiveIndex = prevActiveIndex === imageList.length - 1 ? 0 : prevActiveIndex + 1;
+      return newActiveIndex;
+    });
+  };
 
   if (isLoading) {
-    return <Loading />
+    return (
+      <InView onChange={setInView}>
+        <Loading />
+      </InView>
+    );
   }
 
-  const pokemonTypes = pokemon.types || []
+  const pokemonTypes = pokemon.types || [];
 
-  const primaryType = POKEMON_TYPES.find(
-    (type) => pokemonTypes[0].type.name.includes(type.name)
-  );
+  const primaryType = POKEMON_TYPES.find((type) => pokemonTypes[0].type.name.includes(type.name));
 
   const onSeeDetail = () => {
     setModalState({
       activePokemon: pokemon.name,
-    })
+    });
   };
 
-  const formatPokemonId = (id: number) => `#${String(id).padStart(3, '0')}`
+  const formatPokemonId = (id: number) => `#${String(id).padStart(3, '0')}`;
 
   return (
     <Container>
       <CardOverlay color={primaryType.color} />
       <PokemonImg>
-        <SkeletonLoading
-          onPress={handlePressImage}
-          src={imageList[activeImageIndex]}
-          alt={pokemon.name}
-        />
+        <SkeletonLoading onPress={handlePressImage} src={imageList[activeImageIndex]} alt={pokemon.name} />
       </PokemonImg>
       <PokemonNumber>{formatPokemonId(pokemon.id)}</PokemonNumber>
       <PokemonName>{pokemon.name}</PokemonName>
@@ -78,14 +79,20 @@ const PokemonCard = (props: Props) => {
         <PokemonWeight>
           <div>
             <WeightIcon />
-            <span>{`${pokemon.weight / 10}`}{' kg'}</span>
+            <span>
+              {`${pokemon.weight / 10}`}
+              {' kg'}
+            </span>
           </div>
           <span>{'Weight'}</span>
         </PokemonWeight>
         <PokemonHeight>
           <div>
             <RulerIcon />
-            <span>{`${pokemon.height / 10}`}{' m'}</span>
+            <span>
+              {`${pokemon.height / 10}`}
+              {' m'}
+            </span>
           </div>
           <span>{'Height'}</span>
         </PokemonHeight>
@@ -99,7 +106,6 @@ const PokemonCard = (props: Props) => {
 };
 
 export default PokemonCard;
-
 
 const fadeDown = keyframes`
   from {
@@ -143,7 +149,7 @@ const CardOverlay = styled.div<{ color: string }>`
   -moz-transform: translate3d(0, 0, 0);
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 12.5rem;
     height: 12.5rem;
@@ -173,7 +179,7 @@ const PokemonTypeList = styled.div`
   gap: 0.5rem;
 
   button {
-    cursor: default;
+    cursor: pointer;
   }
 `;
 

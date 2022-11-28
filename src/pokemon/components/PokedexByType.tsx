@@ -1,7 +1,8 @@
 import Fuse from 'fuse.js';
 import { useAtom } from 'jotai';
-import { currentPageAtom, pokemonSearchQueryAtom, pokemonTypeAtom } from 'pokemon/atoms/pokemonFilter';
-import { usePokemons, usePokemonsByType } from 'pokemon/queries';
+import { useRouter } from 'next/router';
+import { pokemonSearchQueryAtom } from 'pokemon/atoms/pokemonFilter';
+import { usePokemonsByType } from 'pokemon/queries';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from './ErrorMessage';
@@ -20,33 +21,19 @@ const searchKeyweights = [
   },
 ];
 
-const PokedexV2: React.FC = () => {
-  const [paging] = useAtom(currentPageAtom);
-  const [type] = useAtom(pokemonTypeAtom);
+const PokedexByType: React.FC = () => {
   const [query] = useAtom(pokemonSearchQueryAtom);
 
-  const request = {
-    itemPerPage: paging?.itemPerPage,
-    currentPage: paging?.currentPage,
-  };
+  const router = useRouter();
+  const type = router?.query?.type as string;
 
-  const pokemonByPagingQuery = usePokemons(request, {
-    enabled: !type,
-  });
   const pokemonByTypeQuery = usePokemonsByType({
     type,
   });
 
-  const { isError, isLoading, isFetching } = type ? pokemonByTypeQuery : pokemonByPagingQuery;
+  const { isError, isLoading, isFetching } = pokemonByTypeQuery;
 
-  const pokemonList = useMemo(() => {
-    if (type) {
-      const pokemonTypes = pokemonByTypeQuery?.data?.pokemon || [];
-      return pokemonTypes.map(({ pokemon }) => pokemon);
-    }
-
-    return pokemonByPagingQuery?.data?.results || [];
-  }, [type, pokemonByPagingQuery, pokemonByTypeQuery]);
+  const pokemonList = pokemonByTypeQuery?.data?.pokemon?.map(({ pokemon }) => pokemon) || [];
 
   const fuzzyPokemonList = new Fuse(pokemonList, {
     keys: searchKeyweights,
@@ -94,7 +81,7 @@ const PokedexV2: React.FC = () => {
   );
 };
 
-export default PokedexV2;
+export default PokedexByType;
 
 const PokedexContainer = styled.div`
   margin-bottom: 9rem;

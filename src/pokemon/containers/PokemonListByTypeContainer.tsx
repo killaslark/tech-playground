@@ -1,11 +1,10 @@
 import { useAtom } from 'jotai';
 import UpArrowIcon from 'pokemon/assets/icons/icon-arrow-up.svg';
-import { pokemonTypeAtom } from 'pokemon/atoms/pokemonFilter';
 import pokemonModal from 'pokemon/atoms/pokemonModal';
-import { Header, PokedexV2, PokemonModal, SearchBar } from 'pokemon/components';
+import { Header, PokedexByType, PokemonModal, SearchBar } from 'pokemon/components';
 import React from 'react';
 
-const PokemonListV2Container = () => {
+const PokemonListByTypeContainer = () => {
   const [modalState] = useAtom(pokemonModal);
 
   const showModal = !!modalState?.activePokemon;
@@ -17,13 +16,11 @@ const PokemonListV2Container = () => {
     });
   };
 
-  const [type] = useAtom(pokemonTypeAtom);
-
   return (
     <React.Fragment>
       <Header />
-      <SearchBar hideSearch={!type} />
-      <PokedexV2 />
+      <SearchBar hideFilter />
+      <PokedexByType />
       {showModal && <PokemonModal />}
       <button
         className={'button'}
@@ -42,4 +39,4 @@ const PokemonListV2Container = () => {
   );
 };
 
-export default PokemonListV2Container;
+export default PokemonListByTypeContainer;
