@@ -1,28 +1,23 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import getPokemons, { GetPokemonsRequest, GetPokemonsResponse, GET_POKEMONS_API } from 'pokemon/services/getPokemons';
+import getPokemons, { GET_POKEMONS_API, GetPokemonsRequest, GetPokemonsResponse } from 'pokemon/services/getPokemons';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
-type UsePokemonsKey = [string, GetPokemonsRequest]
+type UsePokemonsKey = [string, GetPokemonsRequest];
 
-type UsePokemonsConfig = UseQueryOptions<
-  GetPokemonsResponse,
-  any,
-  GetPokemonsResponse,
-  UsePokemonsKey
->
+type UsePokemonsConfig = UseQueryOptions<GetPokemonsResponse, unknown, GetPokemonsResponse, UsePokemonsKey>;
 
 const usePokemons = (request: GetPokemonsRequest, config?: UsePokemonsConfig) => {
-  const queryKey = [GET_POKEMONS_API, request]
-  const fetchPokemonDetail = () => getPokemons(request)
+  const queryKey = [GET_POKEMONS_API, request];
+  const fetchPokemonDetail = () => getPokemons(request);
 
   const query = useQuery(queryKey, fetchPokemonDetail, {
     ...config,
     cacheTime: 600_000,
     staleTime: 300_000,
-  })
+  });
 
   return {
     ...query,
-    queryKey
-  }
-}
+    queryKey,
+  };
+};
 export default usePokemons;

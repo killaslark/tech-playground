@@ -9,7 +9,7 @@ type UsePokemonDetailKey = [string, GetPokemonDetailRequest];
 
 type UsePokemonDetailConfig = UseQueryOptions<
   GetPokemonDetailResponse,
-  any,
+  unknown,
   GetPokemonDetailResponse,
   UsePokemonDetailKey
 >;

@@ -1,33 +1,32 @@
-import { useMemo } from 'react'
+import getPokemons, { GET_POKEMONS_API, GetPokemonsRequest, GetPokemonsResponse } from 'pokemon/services/getPokemons';
+import { useMemo } from 'react';
+import { GetNextPageParamFunction, UseInfiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query';
 
-import { GetNextPageParamFunction, useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query'
-import getPokemons, { GetPokemonsRequest, GetPokemonsResponse, GET_POKEMONS_API } from 'pokemon/services/getPokemons'
-
-type UseInfinitePokemonsKeys = [string, GetPokemonsRequest]
+type UseInfinitePokemonsKeys = [string, GetPokemonsRequest];
 type UseInfinitePokemonsOptions = UseInfiniteQueryOptions<
   GetPokemonsResponse,
-  any,
+  unknown,
   GetPokemonsResponse,
   GetPokemonsResponse,
   UseInfinitePokemonsKeys
->
+>;
 
 const useInfinitePokemons = (request: GetPokemonsRequest, config?: UseInfinitePokemonsOptions) => {
   const queryKey = [GET_POKEMONS_API, request];
 
   const fetchPokemon = ({ pageParam = 1 }) => {
-    return getPokemons({ ...request, currentPage: pageParam })
-  }
+    return getPokemons({ ...request, currentPage: pageParam });
+  };
 
   const getNextPageParam: GetNextPageParamFunction<GetPokemonsResponse> = (lastPage, allPages) => {
-    const itemPerPage = request.itemPerPage || 10
-    const totalLastPageResults = lastPage?.results.length
-    const totalAllPages = allPages?.length
+    const itemPerPage = request.itemPerPage || 10;
+    const totalLastPageResults = lastPage?.results.length;
+    const totalAllPages = allPages?.length;
 
     if (totalLastPageResults === itemPerPage) {
-return totalAllPages + 1
-}
-  }
+      return totalAllPages + 1;
+    }
+  };
 
   const query = useInfiniteQuery(queryKey, fetchPokemon, {
     getNextPageParam,
@@ -35,8 +34,6 @@ return totalAllPages + 1
     cacheTime: 600_000,
     staleTime: 300_000,
   });
-
-
 
   const pokemons = useMemo(() => {
     const pages = query?.data?.pages || [];
@@ -50,7 +47,7 @@ return totalAllPages + 1
     ...query,
     pokemons,
     queryKey,
-  }
-}
+  };
+};
 
 export default useInfinitePokemons;
